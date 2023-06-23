@@ -205,6 +205,8 @@ class TensorDataset(Dataset[Tuple[Tensor, ...]]):
         self.tensors = tensors
 
     def __getitem__(self, index):
+        if len(self.tensors) == 1:
+            return self.tensors[0][index]
         return tuple(tensor[index] for tensor in self.tensors)
 
     def __len__(self):
